@@ -1,198 +1,207 @@
-## AI-Idea-Stress-Tester
-buisness website which test startup ideas
-CORE CONCEPT (BASE)
-🔥 AI Idea Stress Tester
+# 🚀 AI Startup War Simulator
 
-Input: startup idea / project
-Output:
+> Stress-test your startup idea before the real world does.
 
-Weaknesses
-Risks
-Failure scenarios
-Survival strategies
+A multi-agent AI system that analyzes, attacks, and evaluates startup ideas from different real-world perspectives — helping founders identify risks, predict failures, and improve their ideas early.
 
-👉 foundation
+---
 
-⚡ EXPANSION MODULES 
-💣 1. “AI Attack Engine”
+## 🧠 About the Project
 
-Idea:
-AI behaves like:
+Most startup ideas fail not because they are bad, but because they are **never challenged properly**.
 
-Competitor
-Investor
-Hacker
-Angry customer
+This project simulates a real-world environment where your idea is:
 
-It attacks your idea from all sides
+* Criticized
+* Attacked
+* Evaluated
+* Improved
 
-Example Output:
+It combines multiple AI roles to produce a **comprehensive breakdown of your idea’s survival chances**.
 
-“Your competitor will undercut pricing”
-“Your system can be easily exploited”
+---
 
-👉 Makes project feel like real-world simulation
+## ✨ Key Features
 
-🧬 2. “Failure Timeline Generator”
+* 🔍 **Idea Stress Testing**
+  Detects weaknesses, risks, and feasibility issues.
 
-Idea:
-AI shows:
-👉 How  idea will fail over time
+* 💣 **AI Attack Engine**
+  Simulates pressure from competitors, investors, customers, and threats.
 
-Example:
+* ⏳ **Failure Timeline Generator**
+  Predicts how the idea may fail over time.
 
-Month 1 → low users
-Month 3 → funding issue
-Month 6 → competitor kills you
+* 🧠 **Survival Strategy Generator**
+  Suggests pivots, improvements, and better approaches.
 
-👉  timeline visualization
+* 📊 **Success Probability Score**
+  Estimates the likelihood of success based on multiple factors.
 
-🧠 3. “Survival Strategy Generator”
+* 🧑‍⚖️ **AI Jury Panel**
+  Combines multiple perspectives (Investor, Engineer, User, Critic).
 
-Idea:
-After breaking your idea → AI fixes it
+---
 
-Gives:
+## 🏗️ Tech Stack
 
-Pivot ideas
-Business model changes
-Tech improvements
+**Frontend**
 
-👉 Turns negative → positive
+* HTML, CSS, JavaScript
+* Custom UI with animated canvas background
 
-🎯 4. “Success Probability Score”
+**Backend**
 
-Idea:
-AI gives:
+* FastAPI (Python)
+* REST API architecture
 
-% chance of success
-Based on:
-Market
-Tech
-Competition
+**AI System**
 
-👉 simple gauge UI
+* Multi-agent LLM pipeline
+* Role-based prompt engineering
+* Output aggregation via a “judge” model
 
-🧩 5. “Idea Evolution Engine”
+**Database**
 
-Idea:
-AI automatically upgrades your idea:
+* JSON-based storage (current)
+* MongoDB (planned)
 
-Example:
-👉 “Add AI personalization”
-👉 “Change target audience”
+---
 
-Output:
+## ⚙️ How It Works
 
-Version 1 → Basic idea
-Version 2 → Improved
-Version 3 → Advanced
-🧪 6. “What If Simulator”
+```text
+User Input → API Request → AI Agents → Aggregation → Response → UI Display
+```
 
-Idea:
-User asks:
+1. User submits a startup idea
+2. Backend runs multiple AI agents:
 
-What if funding fails?
-What if users double?
-What if server crashes?
+   * Risk Analyst
+   * Attack Simulator
+   * Judge
+3. Outputs are combined into a structured result
+4. Frontend displays insights (score, risks, timeline, strategies)
 
-AI simulates outcome
+---
 
-👉 Adds interactive depth
+## 🔌 API Endpoints
 
-🧑‍⚖️ 7. “AI Jury Panel”
+### `POST /analyze`
 
-Idea:
-Multiple AI roles:
+Analyzes a startup idea.
 
-Investor 💰
-Engineer ⚙️
-Customer 🧑
-Critic 😈
+**Request Body**
 
-Each gives opinion separately
+```json
+{
+  "idea": "Your startup idea here"
+}
+```
 
-👉 This is a SUPER strong feature
+**Response**
 
-📊 8. “Market Reality Checker”
+```json
+{
+  "risk_analysis": "...",
+  "attack_analysis": "...",
+  "final_result": "..."
+}
+```
 
-Idea:
-AI checks:
+---
 
-Is this already built?
-Is market saturated?
+## 🖥️ Local Setup
 
-👉 Makes it practical, not just theoretical
+### 1. Clone the repository
 
-🧠 9. “Bias & Blind Spot Detector”
+```bash
+git clone https://github.com/your-username/ai-startup-war-simulator.git
+cd ai-startup-war-simulator
+```
 
-Idea:
-AI tells:
-👉 “You are overestimating demand”
-👉 “You ignored cost factor”
+### 2. Create virtual environment
 
-👉 Very rare feature = big impact
+```bash
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+```
 
-🔄 10. “Auto Pitch Fixer”
+### 3. Install dependencies
 
-Idea:
-User gives pitch → AI improves it after stress testing
+```bash
+pip install -r requirements.txt
+```
 
-👉 Full cycle:
-Idea → Break → Fix → Pitch
+### 4. Add environment variables
 
-💥 FINAL COMBO (BEST VERSION YOU SHOULD BUILD)
+Create a `.env` file:
 
-If you want a WINNING PROJECT, combine THIS:
+```env
+OPENROUTER_API_KEY_1=your_key
+OPENROUTER_API_KEY_2=your_key
+OPENROUTER_API_KEY_3=your_key
+```
 
-🏆 “AI Startup War Simulator”
+### 5. Run backend
 
-Include:
+```bash
+uvicorn main:app --reload
+```
 
-Idea Stress Tester (core)
-AI Attack Engine
-AI Jury Panel
-Failure Timeline
-Survival Strategy
-Success Score
+### 6. Open frontend
 
-👉 This becomes:
-“Simulates real-world startup survival”
+Open `index.html` or `simulator.html` in your browser.
 
-⚙️ HOW TO BUILD FAST (IMPORTANT)
-Backend (FastAPI)
+---
 
-Routes:
+## 🚧 Current Limitations
 
-/analyze-idea
-/attack
-/timeline
-/fix
-/score
-AI Prompt Trick (VERY IMPORTANT)
+* Responses may overlap across agents
+* No persistent user history
+* Basic authentication (in progress)
+* AI cost optimization not implemented
 
-Instead of one big prompt, use multiple small prompts:
+---
 
-Example:
+## 🔮 Roadmap
 
-“Act as a harsh investor…”
-“Act as competitor…”
-“Act as failure predictor…”
+* [ ] JWT Authentication
+* [ ] User Dashboard
+* [ ] Save & Track Ideas
+* [ ] Graph-based Timeline Visualization
+* [ ] Voice Input Support
+* [ ] More Diverse AI Agents
 
-👉creates illusion of multiple AI agents
+---
 
-Frontend (Simple but powerful)
-Input box (idea)
-Tabs:
-Risks
-Attacks
-Timeline
-Fixes
-Progress bar / score meter
-🧨 FINAL EDGE (TO IMPRESS JUDGES)
+## 🎯 Use Case
 
-Add ONE of these:
+* Startup founders validating ideas
+* Hackathon projects
+* Product managers exploring concepts
+* Students learning about business risk
 
-🔊 Voice input (“Speak your idea”)
-📈 Graph (failure timeline)
-🎭 Role-play UI (Investor vs Founder)
+---
+
+## ⚠️ Disclaimer
+
+This tool provides **analytical insights**, not guarantees.
+Decisions should not rely solely on AI output.
+
+---
+
+## 👨‍💻 Author
+
+Built as a hands-on project exploring:
+
+* Multi-agent AI systems
+* Startup validation workflows
+* Practical product development
+
+---
+
+## ⭐ Final Thought
+
+If your idea survives this system,
+it has a better chance of surviving reality.
