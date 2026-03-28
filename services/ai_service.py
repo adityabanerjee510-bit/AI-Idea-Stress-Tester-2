@@ -1,14 +1,26 @@
 from dotenv import load_dotenv
+from fastapi.responses import FileResponse
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 import os
 from fastapi import FastAPI
 from pydantic import BaseModel, Field, computed_field
 from typing import List, Optional,Annotated,Literal
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 class IdeaRequest(BaseModel):
     idea: str = Annotated[str, Field(..., description="The startup idea to analyze")]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 load_dotenv()
 
@@ -175,3 +187,7 @@ def analyze_idea(request: IdeaRequest):
         "attack_analysis": out2,
         "final_result": final
     }
+
+@app.get("/simulator.html")
+def read_simulator():
+    return FileResponse("Frontend-2/simulator.html")

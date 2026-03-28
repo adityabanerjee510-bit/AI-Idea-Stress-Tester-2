@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field, computed_field
 from typing import List, Optional,Annotated,Literal
 import json
 from pathlib import Path
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 
 app = FastAPI()
 
@@ -55,7 +55,7 @@ def load_data():
             data=json.load(f)
             return data
     else:
-        return []
+        return {}
 
 
 def save_data(data):
@@ -68,13 +68,33 @@ def save_data(data):
 def signup(user: User):
     data = load_data()
 
-    data[user.Id] = user.model_dump(exclude={"Password1", "Id","Password2", "Is_Password_Match", "First_Name", "Last_Name","Password2"})  # Exclude the password fields and other computed fields
+    # ✅ Ensure data is dict
+    if not isinstance(data, dict):
+        data = {}
+
+    # ✅ Check if user already exists
+    if user.Id in data:
+        raise HTTPException(status_code=400, detail="User already exists")
+
+    # ✅ Save clean data
+    data[user.Id] = {
+        "Name": user.Name,
+        "Email": user.Email,
+        "Password": user.Password1   # store actual password
+    }
 
     save_data(data)
 
-    return JSONResponse(status_code=201,content={"message": f"User {user.Name} with email {user.Email} created successfully"})
+    print("Incoming user:", user)  
+
+    return JSONResponse(
+        status_code=201,
+        content={"message": f"User {user.Name} created successfully"}
+    )
+
 
 @app.post("/login")
+
 def login_user(user: Login):
     data = load_data()
 
@@ -98,3 +118,20 @@ def login_user(user: Login):
         status_code=200,
         content={"message": "Login successful"}
     )
+
+@app.get("/Login.html")
+def read_login():
+    file_path = Path(__file__).resolve().parent.parent / "Frontend-2" / "Login2.html"
+    return FileResponse(file_path)
+
+
+@app.get("/Signup.html")
+def read_signup():
+    file_path1 = Path(__file__).resolve().parent.parent / "Frontend-2" / "signup2.html"
+    return FileResponse(file_path1)
+
+
+@app.get("/Dashboard.html")
+def read_dashboard():
+    file_path2 = Path(__file__).resolve().parent.parent / "Frontend-2" / "Dashboard.html"
+    return FileResponse(file_path2)

@@ -15,9 +15,9 @@ def read_root():
 def read_signup():
     return FileResponse("Frontend-2/Signup.html") 
 
-@app.get("/Login.html")
-def read_login():
-    return FileResponse("Frontend-2/Login.html")
+# @app.get("/Login.html")
+# def read_login():
+#     return FileResponse("Frontend-2/Login2.html")
 
 @app.get("/Dashboard.html")
 def read_dashboard():
